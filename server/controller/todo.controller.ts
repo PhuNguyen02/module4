@@ -30,14 +30,6 @@ class TodoController {
 
   async addTask(req: Request, res: Response) {
     const { title } = req.body;
-    if (!title) {
-      res.status(400).send('Title is required');
-      return;
-    }
-    if (title.length > 200) {
-      res.status(400).send('Title length should not exceed 200 characters');
-      return;
-    }
     try {
       const existingTask = await TodoRepository.getAllTasks();
       const isExisting = existingTask.some(task => task.title === title);
